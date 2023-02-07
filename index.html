@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario para calculo</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap"
+        rel="stylesheet" />
+</head>
+
+<body>
+    <form action="resultado.html" method="post" class="form">
+        <div class="inputs">
+            <label for="">Salário base</label>
+            <input type="text" id="entrada" placeholder="Digite o salario base" />
+            <br />
+            <label for="">Tempo de serviço</label>
+            <input type="text" id="tempo" placeholder="Digite o tempo de serviço" />
+            <br />
+            <label for="">Numero de dependentes</label>
+            <input type="text" id="dependentes" placeholder="Digite o num. de dependentes" />
+            <br />
+            <label for="">Adicional de Titulação</label>
+            <input type="text" id="porcentagem" placeholder="Digite a porcentagem" />
+            <br />
+            <label for="">Gratificação de Nivel Superior</label>
+            <input type="text" id="gratificacao" placeholder="s para sim, n para não" />
+            <br />
+            <button type="submit" id="btn_enviar" onclick="calculaContraCheque()">
+                Calcular
+            </button>
+
+        </div>
+
+    </form>
+    <script src="./js/scripts.js"></script>
+
+</body>
+
+</html>
