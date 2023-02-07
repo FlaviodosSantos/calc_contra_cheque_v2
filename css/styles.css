@@ -3,9 +3,11 @@
     margin: 0;
     padding: 0;
     font-family: "Poppins", sans-serif;
+    font-size: 1.2rem;
 }
 
 body {
+    padding: .75rem;
     width: 100%;
     min-height: 100vh;
     background: linear-gradient(90deg, #00dbde 0%, #280329 100%);
@@ -16,7 +18,7 @@ body {
 
 form,
 .resultados {
-    width: 350px;
+    width: 380px;
     padding: 20px;
     background-color: rgba(250, 250, 250, 0.5);
     border-radius: 10px;
@@ -27,7 +29,7 @@ input {
     border: 1px solid transparent;
     border-radius: 5px;
     width: 100%;
-    font-size: 1rem;
+
     font-weight: 600;
     text-align: right;
     padding: 0 10px;
@@ -49,7 +51,7 @@ a {
     font-size: 1rem;
     font-weight: 600;
     line-height: 1.5rem;
-
+    padding: 1rem;
     text-decoration: none;
     transition-duration: .2s;
 
@@ -76,13 +78,14 @@ a:focus {
     outline-offset: 2px;
 }
 
+/*
 @media (min-width: 768px) {
 
     button,
     a {
         padding: .75rem 1.5rem;
     }
-}
+}*/
 
 hr {
     margin-top: 1rem;
