@@ -106,18 +106,18 @@ function calcula_sal_bruto(plano_de_cargos, insa, adts, titulacao, gratNivSup) {
 function calcula_inss(bruto, insa) {
   var baseInss = bruto - insa;
   var inss = 0;
-  if (baseInss <= 1212.0) {
+  if (baseInss <= 1320.0) {
     //1ªfaixa
     inss = baseInss * 0.075;
-  } else if (baseInss > 1212.0 && baseInss <= 2427.35) {
+  } else if (baseInss > 1320.0 && baseInss <= 2571.29) {
     //2ªfaixa
-    inss = 90.9 + (baseInss - 1212) * 0.09;
-  } else if (baseInss > 2427.35 && baseInss <= 3641.03) {
+    inss = 90.9 + (baseInss - 1320.0) * 0.09;
+  } else if (baseInss > 2571.29 && baseInss <= 3856.94) {
     //3ªfaixa
-    inss = 90.9 + 109.38 + (baseInss - 2427.35) * 0.12;
-  } else if (baseInss > 3641.03 && baseInss <= 7087.22) {
+    inss = 90.9 + 109.38 + (baseInss - 2571.29) * 0.12;
+  } else if (baseInss > 3856.94 && baseInss <= 7507.49) {
     //4ªfaixa
-    inss = 90.9 + 109.38 + 145.64 + (baseInss - 3641.03) * 0.14;
+    inss = 90.9 + 109.38 + 145.64 + (baseInss - 3856.94) * 0.14;
   } else {
     inss = 828.39;
   }
