@@ -119,7 +119,7 @@ function calcula_inss(bruto, insa) {
     //4ªfaixa
     inss = 99.0 + 112.62 + 154.28 + (baseInss - 3856.94) * 0.14;
   } else {
-    inss = 877.25;
+    inss = 876.97;
   }
   console.log("inss: " + inss);
 
