@@ -1,12 +1,15 @@
 
 
-function calculaContraCheque(entrada, tempo, tit, nivSup, numDependentes) {
+function calculaContraCheque(entrada, tempo, tit, nivSup, numDependentes, protetor, sindicatos, emprestimos) {
   //pegando os inputs
   var entrada = document.getElementById("entrada").value;
   var tempo = document.getElementById("tempo").value;
   var tit = document.getElementById("porcentagem").value;
   var nivSup = document.getElementById("gratificacao").value;
   var numDependentes = Number(document.getElementById("dependentes").value);
+  var protetor = document.getElementById("protetor").value;
+  var sindicatos = Number(document.getElementById("sindicatos").value);
+  var emprestimos = Number(document.getElementById("emprestimos").value);
 
   //calculando o salario do plano de cargos
   console.log("entrada " + entrada);
@@ -22,7 +25,17 @@ function calculaContraCheque(entrada, tempo, tit, nivSup, numDependentes) {
   var titulacao = calcula_titulacao(plano_de_cargos, tit);
   
   //verificando a gratificação de nivel superior
-  var gratNivSup = verif_gratificacao(nivSup);  
+  var gratNivSup = verif_gratificacao(nivSup); 
+  
+  //verificando adicional de protetor
+  var prot = verif_protetor(protetor);  
+  
+  //verificando desconto sindicatos
+  var sind =  plano_de_cargos * 0.01 * sindicatos;  
+  
+  //verificando desconto de emprestimos
+  var emprestimo = emprestimos;  
+   
 
   //calculando o salario bruto
   var bruto = calcula_sal_bruto(
@@ -30,17 +43,18 @@ function calculaContraCheque(entrada, tempo, tit, nivSup, numDependentes) {
     insa,
     adts,
     titulacao,
-    gratNivSup
+    gratNivSup, 
+    prot
   );  
 
   //calcular inss
-  var inss = calcula_inss(bruto, insa);  
+  var inss = calcula_inss(bruto, insa, prot);  
 
   //calcular irrf = [(Salário bruto - dependentes - INSS) X alíquota] - dedução
-  var irrf = calcula_irrf(bruto, inss, numDependentes);  
+  var irrf = calcula_irrf(bruto, inss, numDependentes, prot);  
 
   // Salario Liquido
-  var liquido = calcula_sal_liquido(bruto, inss, irrf);  
+  var liquido = calcula_sal_liquido(bruto, inss, irrf, emprestimo, sind);  
 
   // setando no session storage
   // "banco de dados" temporario do browser
@@ -52,6 +66,9 @@ function calculaContraCheque(entrada, tempo, tit, nivSup, numDependentes) {
   sessionStorage.setItem("bruto", bruto)
   sessionStorage.setItem("inss", inss);
   sessionStorage.setItem("irrf", irrf)
+  sessionStorage.setItem("prot", prot)
+  sessionStorage.setItem("sind", sind)
+  sessionStorage.setItem("emprestimo", emprestimo)
   sessionStorage.setItem("liquido", liquido)
 
   return liquido;
@@ -97,14 +114,24 @@ function verif_gratificacao(nivSup) {
   return grat;
 }
 
-function calcula_sal_bruto(plano_de_cargos, insa, adts, titulacao, gratNivSup) {
-  var bruto = plano_de_cargos + insa + adts + titulacao + gratNivSup;
+function verif_protetor(protetor) {
+  if (protetor == "s" || protetor == "S") {
+    var grat_protetor = 50.00;
+  } else {
+    grat_protetor = 0;
+  }
+  console.log("protetor : " + grat_protetor);
+  return grat_protetor;
+}
+
+function calcula_sal_bruto(plano_de_cargos, insa, adts, titulacao, gratNivSup, prot) {
+  var bruto = plano_de_cargos + insa + adts + titulacao + gratNivSup + prot;
   console.log("bruto : " + bruto);
   return bruto;
 }
 
-function calcula_inss(bruto, insa) {
-  var baseInss = bruto - insa;
+function calcula_inss(bruto, insa, prot) {
+  var baseInss = bruto - insa - prot;
   var inss = 0;
   if (baseInss <= 1320.0) {
     //1ªfaixa
@@ -126,7 +153,7 @@ function calcula_inss(bruto, insa) {
   return inss;
 }
 
-function calcula_irrf(bruto, inss, numDependentes) {
+function calcula_irrf(bruto, inss, numDependentes, prot) {
   //calcular irrf = [(Salário bruto - dependentes - INSS) X alíquota] - dedução
 
   //verificando os dependentes
@@ -136,7 +163,7 @@ function calcula_irrf(bruto, inss, numDependentes) {
   console.log("numDependentes :" + numDependentes);
 
   var irrf = 0;
-  var baseIrrf = bruto - inss - numDependentes * 189.59;
+  var baseIrrf = bruto - prot - inss - numDependentes * 189.59;
   console.log("baseIrrf : " + baseIrrf);
 
   if (baseIrrf <= 2112.0) {
@@ -155,8 +182,9 @@ function calcula_irrf(bruto, inss, numDependentes) {
   return irrf;
 }
 
-function calcula_sal_liquido(bruto, inss, irrf) {
-  var liquido = bruto - inss - irrf;
+
+function calcula_sal_liquido(bruto, inss, irrf, emprestimo, sind) {
+  var liquido = bruto - inss - irrf - emprestimo - sind;
   console.log("liquido : " + liquido);
   return liquido;
 }

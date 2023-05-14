@@ -35,11 +35,11 @@ function resultado(){
     document.getElementById("irrf").value = irrf.toFixed(2);
     
     //informa a dedução de sindicato
-    var sindicatos = Number(sessionStorage.getItem("sindicatos"))
+    var sindicatos = Number(sessionStorage.getItem("sind"))
     document.getElementById("sindicatos").value = sindicatos.toFixed(2);
     
     //informa a dedução de emprestimo
-    var emprestimos = Number(sessionStorage.getItem("emprestimos"))
+    var emprestimos = Number(sessionStorage.getItem("emprestimo"))
     document.getElementById("emprestimos").value = emprestimos.toFixed(2);
 
     // Salario Liquido
