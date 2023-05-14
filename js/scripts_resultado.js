@@ -33,6 +33,14 @@ function resultado(){
     //calcular irrf = [(Salário bruto - dependentes - INSS) X alíquota] - dedução
     var irrf = Number(sessionStorage.getItem("irrf"))
     document.getElementById("irrf").value = irrf.toFixed(2);
+    
+    //informa a dedução de sindicato
+    var sindicatos = Number(sessionStorage.getItem("sindicatos"))
+    document.getElementById("sindicatos").value = sindicatos.toFixed(2);
+    
+    //informa a dedução de emprestimo
+    var emprestimos = Number(sessionStorage.getItem("emprestimos"))
+    document.getElementById("emprestimos").value = emprestimos.toFixed(2);
 
     // Salario Liquido
     var liquido = Number(sessionStorage.getItem("liquido"))
