@@ -162,7 +162,7 @@ function calcula_inss(bruto, insa, prot) {
     inss = 105.09 + 112.92 + (baseInss - 2666.68) * 0.12;
   } else if (baseInss > 4000.03 && baseInss <= 7507.49) {
     //4ªfaixa
-    inss = 105.09 + 112.92 + 1160.00 + (baseInss - 4000.03) * 0.14;
+    inss = 105.09 + 112.92 + 160.00 + (baseInss - 4000.03) * 0.14;
   } else {
     inss = 876.97;
   }
