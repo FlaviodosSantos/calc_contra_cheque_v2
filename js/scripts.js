@@ -156,15 +156,15 @@ function calcula_inss(bruto, insa, prot) {
     inss = baseInss * 0.075;
   } else if (baseInss > 1412.0 && baseInss <= 2666.68) {
     //2ªfaixa
-    inss = 105.09 + (baseInss - 1412.0) * 0.09;
+    inss = 105.90 + (baseInss - 1412.0) * 0.09;
   } else if (baseInss > 2666.68 && baseInss <= 4000.03) {
     //3ªfaixa
-    inss = 105.09 + 112.92 + (baseInss - 2666.68) * 0.12;
-  } else if (baseInss > 4000.03 && baseInss <= 7507.49) {
+    inss = 105.90 + 112.92 + (baseInss - 2666.68) * 0.12;
+  } else if (baseInss > 4000.03 && baseInss <= 7786.02) {
     //4ªfaixa
-    inss = 105.09 + 112.92 + 160.00 + (baseInss - 4000.03) * 0.14;
+    inss = 105.90 + 112.92 + 160.00 + (baseInss - 4000.03) * 0.14;
   } else {
-    inss = 876.97;
+    inss = 908,86;
   }
   console.log("inss: " + inss);
 
