@@ -133,36 +133,25 @@ function calcula_sal_bruto(plano_de_cargos, insa, adts, titulacao, gratNivSup, p
 function calcula_inss(bruto, insa, prot) {
   var baseInss = bruto - insa - prot;
   var inss = 0;
-  /* calculo 2023
-  if (baseInss <= 1320.0) {
-    //1ªfaixa
-    inss = baseInss * 0.075;
-  } else if (baseInss > 1320.0 && baseInss <= 2571.29) {
-    //2ªfaixa
-    inss = 99.0 + (baseInss - 1320.0) * 0.09;
-  } else if (baseInss > 2571.29 && baseInss <= 3856.94) {
-    //3ªfaixa
-    inss = 99.0 + 112.62 + (baseInss - 2571.29) * 0.12;
-  } else if (baseInss > 3856.94 && baseInss <= 7507.49) {
-    //4ªfaixa
-    inss = 99.0 + 112.62 + 154.28 + (baseInss - 3856.94) * 0.14;
-  } else {
-    inss = 876.97;
-  }*/
-
+  
   /* novo calculo 2024 */
-  if (baseInss <= 1412.0) {
     //1ªfaixa
+  if (baseInss <= 1412.0) {    
     inss = baseInss * 0.075;
-  } else if (baseInss > 1412.0 && baseInss <= 2666.68) {
+
     //2ªfaixa
+  } else if (baseInss > 1412.0 && baseInss <= 2666.68) {    
     inss = 105.90 + (baseInss - 1412.0) * 0.09;
-  } else if (baseInss > 2666.68 && baseInss <= 4000.03) {
+
     //3ªfaixa
+  } else if (baseInss > 2666.68 && baseInss <= 4000.03) {    
     inss = 105.90 + 112.92 + (baseInss - 2666.68) * 0.12;
-  } else if (baseInss > 4000.03 && baseInss <= 7786.02) {
+
     //4ªfaixa
+  } else if (baseInss > 4000.03 && baseInss <= 7786.02) {    
     inss = 105.90 + 112.92 + 160.00 + (baseInss - 4000.03) * 0.14;
+
+    //5ªfaixa
   } else {
     inss = 908,86;
   }
@@ -192,19 +181,7 @@ function calcula_irrf(bruto, inss, numDependentes, prot) {
   }
 
   console.log("baseIrrf : " + baseIrrf);
-
-  /*if (baseIrrf <= 2112.0) {
-    irrf = 0;
-  } else if (baseIrrf > 2112.0 && baseIrrf <= 2826.65) {
-    irrf = baseIrrf * 0.075 - 158.4;
-  } else if (baseIrrf > 2826.65 && baseIrrf <= 3751.05) {
-    irrf = baseIrrf * 0.15 - 370.4;
-  } else if (baseIrrf > 3751.05 && baseIrrf <= 4664.68) {
-    irrf = baseIrrf * 0.225 - 651.73;
-  } else {
-    irrf = baseIrrf * 0.275 - 884.96;
-  }*/
-
+  
   // calculo 2024
   // se numDependentes menor que 2 e salario menor que 5mil
   if (baseIrrf <= 2259.20) {
