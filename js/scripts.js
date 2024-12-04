@@ -139,16 +139,16 @@ function calcula_irrf(bruto, inss, numDependentes) {
   var baseIrrf = bruto - inss - numDependentes * 189.59;
   console.log("baseIrrf : " + baseIrrf);
 
-  if (baseIrrf <= 2112.0) {
+  if (baseIrrf <= 2259.20) {
     irrf = 0;
-  } else if (baseIrrf > 2112.0 && baseIrrf <= 2826.65) {
-    irrf = baseIrrf * 0.075 - 158.4;
+  } else if (baseIrrf > 2259.20 && baseIrrf <= 2826.65) {
+    irrf = baseIrrf * 0.075 - 169.44;
   } else if (baseIrrf > 2826.65 && baseIrrf <= 3751.05) {
-    irrf = baseIrrf * 0.15 - 370.4;
+    irrf = baseIrrf * 0.15 - 381.44;
   } else if (baseIrrf > 3751.05 && baseIrrf <= 4664.68) {
-    irrf = baseIrrf * 0.225 - 651.73;
+    irrf = baseIrrf * 0.225 - 662.77;
   } else {
-    irrf = baseIrrf * 0.275 - 884.96;
+    irrf = baseIrrf * 0.275 - 896.00;
   }
   console.log(" irrf :" + irrf);
 
