@@ -136,24 +136,24 @@ function calcula_inss(bruto, insa, prot) {
   
   /* novo calculo 2024 */
     //1ªfaixa
-  if (baseInss <= 1412.0) {    
+  if (baseInss <= 1518.0) {    
     inss = baseInss * 0.075;
 
     //2ªfaixa
-  } else if (baseInss > 1412.0 && baseInss <= 2666.68) {    
-    inss = 105.90 + (baseInss - 1412.0) * 0.09;
+  } else if (baseInss > 1518.0 && baseInss <= 2793.88) {    
+    inss = 113.85 + (baseInss - 1518.0) * 0.09;
 
     //3ªfaixa
-  } else if (baseInss > 2666.68 && baseInss <= 4000.03) {    
-    inss = 105.90 + 112.92 + (baseInss - 2666.68) * 0.12;
+  } else if (baseInss > 2793.88 && baseInss <= 4190.83) {    
+    inss = 113.85 + 114.83 + (baseInss - 2793.88) * 0.12;
 
     //4ªfaixa
-  } else if (baseInss > 4000.03 && baseInss <= 7786.02) {    
-    inss = 105.90 + 112.92 + 160.00 + (baseInss - 4000.03) * 0.14;
+  } else if (baseInss > 4190.83 && baseInss <= 8157.41) {    
+    inss = 113.85 + 114.83 + 167.63 + (baseInss - 4190.83) * 0.14;
 
     //5ªfaixa
   } else {
-    inss = 908,86;
+    inss = 975.57;
   }
   console.log("inss: " + inss);
 
