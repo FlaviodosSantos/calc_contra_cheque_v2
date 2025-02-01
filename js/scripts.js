@@ -1,6 +1,6 @@
 
 
-function calculaContraCheque(entrada, tempo, tit, nivSup, numDependentes, protetor, sindicatos, emprestimos) {
+function calculaContraCheque(entrada, tempo, tit, nivSup, numDependentes, protetor, sindicatos, emprestimos, ferias) {
   //pegando os inputs
   var entrada = document.getElementById("entrada").value;
   var tempo = document.getElementById("tempo").value;
@@ -10,6 +10,7 @@ function calculaContraCheque(entrada, tempo, tit, nivSup, numDependentes, protet
   var protetor = document.getElementById("protetor").value;
   var sindicatos = Number(document.getElementById("sindicatos").value);
   var emprestimos = Number(document.getElementById("emprestimos").value);
+  var ferias = document.getElementById("ferias").value;
 
   //calculando o salario do plano de cargos
   console.log("entrada " + entrada);
@@ -34,8 +35,7 @@ function calculaContraCheque(entrada, tempo, tit, nivSup, numDependentes, protet
   var sind =  plano_de_cargos * 0.01 * sindicatos;  
   
   //verificando desconto de emprestimos
-  var emprestimo = emprestimos;  
-   
+  var emprestimo = emprestimos;
 
   //calculando o salario bruto
   var bruto = calcula_sal_bruto(
@@ -45,7 +45,14 @@ function calculaContraCheque(entrada, tempo, tit, nivSup, numDependentes, protet
     titulacao,
     gratNivSup, 
     prot
-  );  
+  );    
+  
+  //verificando e calculando ferias
+  var terco_ferias = verif_ferias(ferias, bruto);
+  
+  
+  // calculando bruto mais ferias
+  var bruto_ferias = calcula_bruto_ferias(bruto, terco_ferias);
 
   //calcular inss
   var inss = calcula_inss(bruto, insa, prot);  
@@ -54,7 +61,7 @@ function calculaContraCheque(entrada, tempo, tit, nivSup, numDependentes, protet
   var irrf = calcula_irrf(bruto, inss, numDependentes, prot);  
 
   // Salario Liquido
-  var liquido = calcula_sal_liquido(bruto, inss, irrf, emprestimo, sind);  
+  var liquido = calcula_sal_liquido(bruto, inss, irrf, emprestimo, sind, terco_ferias);  
 
   // setando no session storage
   // "banco de dados" temporario do browser
@@ -70,6 +77,8 @@ function calculaContraCheque(entrada, tempo, tit, nivSup, numDependentes, protet
   sessionStorage.setItem("sind", sind)
   sessionStorage.setItem("emprestimo", emprestimo)
   sessionStorage.setItem("liquido", liquido)
+  sessionStorage.setItem("terco_ferias", terco_ferias)
+  sessionStorage.setItem("bruto_ferias", bruto_ferias)
 
   return liquido;
 }
@@ -124,17 +133,34 @@ function verif_protetor(protetor) {
   return grat_protetor;
 }
 
+function verif_ferias(ferias, bruto) {
+  if (ferias == "s" || ferias == "S"){
+    // ( bruto - protetor ) / 3 
+    var grat_ferias = Number((bruto - 50)/3);        
+  } else {
+    grat_ferias = 0;
+  }
+  return grat_ferias;
+}
+
 function calcula_sal_bruto(plano_de_cargos, insa, adts, titulacao, gratNivSup, prot) {
   var bruto = plano_de_cargos + insa + adts + titulacao + gratNivSup + prot;
   console.log("bruto : " + bruto);
   return bruto;
 }
 
+
+function calcula_bruto_ferias(bruto, terco_ferias) {
+  var bruto_ferias = bruto + terco_ferias;
+  console.log("bruto : " + bruto);
+  return bruto_ferias;
+}
+
 function calcula_inss(bruto, insa, prot) {
   var baseInss = bruto - insa - prot;
   var inss = 0;
   
-  /* novo calculo 2024 */
+  /* novo calculo 2025 */
     //1ªfaixa
   if (baseInss <= 1518.0) {    
     inss = baseInss * 0.075;
@@ -202,8 +228,8 @@ function calcula_irrf(bruto, inss, numDependentes, prot) {
 }
 
 
-function calcula_sal_liquido(bruto, inss, irrf, emprestimo, sind) {
-  var liquido = bruto - inss - irrf - emprestimo - sind;
+function calcula_sal_liquido(bruto, inss, irrf, emprestimo, sind, terco_ferias) {
+  var liquido = bruto + terco_ferias - inss - irrf - emprestimo - sind;
   console.log("liquido : " + liquido);
   return liquido;
 }

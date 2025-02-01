@@ -21,10 +21,18 @@ function resultado(){
     //verificando a gratificação de nivel superior
     var gratNivSup = Number(sessionStorage.getItem("gratNivSup"))
     document.getElementById("gratNivSup").value = gratNivSup;
+    
+    //verificando o terço de ferias
+    var terco_ferias = Number(sessionStorage.getItem("terco_ferias"))
+    document.getElementById("terco_ferias").value = terco_ferias.toFixed(2);
 
     //setando o salario bruto
     var bruto = Number(sessionStorage.getItem("bruto"))
     document.getElementById("bruto").value = bruto.toFixed(2);
+    
+    //setando o salario bruto mais ferias
+    var bruto_ferias = Number(sessionStorage.getItem("bruto_ferias"))
+    document.getElementById("bruto_ferias").value = bruto_ferias.toFixed(2);
 
     //calcular inss
     var inss = Number(sessionStorage.getItem("inss"))
