@@ -48,7 +48,7 @@ function calculaContraCheque(entrada, tempo, tit, nivSup, numDependentes, protet
   );    
   
   //verificando e calculando ferias
-  var terco_ferias = verif_ferias(ferias, bruto);
+  var terco_ferias = verif_ferias(ferias, prot, bruto);
   
   
   // calculando bruto mais ferias
@@ -133,10 +133,10 @@ function verif_protetor(protetor) {
   return grat_protetor;
 }
 
-function verif_ferias(ferias, bruto) {
+function verif_ferias(ferias, prot, bruto) {
   if (ferias == "s" || ferias == "S"){
     // ( bruto - protetor ) / 3 
-    var grat_ferias = Number((bruto - 50)/3);        
+    var grat_ferias = Number((bruto - prot)/3);        
   } else {
     grat_ferias = 0;
   }
@@ -200,7 +200,8 @@ function calcula_irrf(bruto, inss, numDependentes, prot) {
 
   // calculo 2024  
   // quando as deduções forem menor que 528 e salario menor que 5mil
-  if (inss + numDependentes * 189.59 < 564.80 && bruto - prot < 5000) {
+  //  if (inss + numDependentes * 189.59 < 564.80 && bruto - prot < 5200) 
+  if (inss + numDependentes * 189.59 < 564.80 ) {
     var baseIrrf = bruto - prot - 564.80;
   } else {
     baseIrrf = bruto - prot - inss - numDependentes * 189.59;
