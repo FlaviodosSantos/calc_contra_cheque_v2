@@ -88,27 +88,27 @@ function calcula_plano(entrada, tempo) {
   var capital = entrada;
   var taxaJuros = 5 / 100;
   var tempoAplicacao = Math.trunc(tempo / 5);
-  var montante = Number(capital * Math.pow(1 + taxaJuros, tempoAplicacao));
+  var montante = Number((capital * Math.pow(1 + taxaJuros, tempoAplicacao)).toFixed(2));
  
   console.log("montante : " + montante);
   return montante;
 }
 
 function calcula_insalubridade(plano_de_cargos) {
-  var insalubridade = Number(plano_de_cargos * (30 / 100));
+  var insalubridade = Number((plano_de_cargos * (30 / 100)).toFixed(2));
   console.log("insalubridade :" + insalubridade);
   return insalubridade;
 }
 
 function calcula_tempo_seviço(plano_de_cargos, tempo) {
   var tempoAplicacao = Math.trunc(tempo / 5);
-  var adts = Number(plano_de_cargos * ((tempoAplicacao * 5) / 100));
+  var adts = Number((plano_de_cargos * ((tempoAplicacao * 5) / 100)).toFixed(2));
   console.log("adts : " + adts);
   return adts;
 }
 
 function calcula_titulacao(plano_de_cargos, tit) {
-  var titulacao = Number((plano_de_cargos * tit) / 100);
+  var titulacao = Number(((plano_de_cargos * tit) / 100).toFixed(2));
   console.log("titulacao : " + titulacao);
   return titulacao;
 }
@@ -136,15 +136,16 @@ function verif_protetor(protetor) {
 function verif_ferias(ferias, prot, bruto) {
   if (ferias == "s" || ferias == "S"){
     // ( bruto - protetor ) / 3 
-    var grat_ferias = Number((bruto - prot)/3);        
+    var grat_ferias = Number(((bruto - prot)/3).toFixed(2));        
   } else {
     grat_ferias = 0;
   }
+  console.log("grat ferias : " + grat_ferias)
   return grat_ferias;
 }
 
 function calcula_sal_bruto(plano_de_cargos, insa, adts, titulacao, gratNivSup, prot) {
-  var bruto = plano_de_cargos + insa + adts + titulacao + gratNivSup + prot;
+  var bruto = Number((plano_de_cargos + insa + adts + titulacao + gratNivSup + prot).toFixed(2));
   console.log("bruto : " + bruto);
   return bruto;
 }
@@ -181,9 +182,10 @@ function calcula_inss(bruto, insa, prot) {
   } else {
     inss = 975.57;
   }
-  console.log("inss: " + inss);
+  var insss = Number(inss.toFixed(2))
+  console.log("inss: " + insss);
 
-  return inss;
+  return insss;
 }
 
 function calcula_irrf(bruto, inss, numDependentes, prot) {
