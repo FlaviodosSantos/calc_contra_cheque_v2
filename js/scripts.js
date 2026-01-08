@@ -204,9 +204,9 @@ function calcula_irrf(bruto, inss, numDependentes, prot) {
   // quando as deduções forem menor que 607.20 e salario menor que 5mil
   //  if (inss + numDependentes * 189.59 < 607.20 && bruto - prot < 5200) 
   if (inss + numDependentes * 189.59 < 607.20 ) {
-    var baseIrrf = bruto - prot - 607.20;
+    var baseIrrf = Number((bruto - prot - 607.20).toFixed(2));
   } else {
-    baseIrrf = bruto - prot - inss - numDependentes * 189.59;
+    baseIrrf = Number((bruto - prot - inss - numDependentes * 189.59).toFixed(2));
   }
 
   console.log("baseIrrf : " + baseIrrf);
@@ -224,7 +224,7 @@ function calcula_irrf(bruto, inss, numDependentes, prot) {
   } else {
     irrf = baseIrrf * 0.275 - 908.73;
   }
-
+  irrf = Number(irrf.toFixed(2))
   console.log(" irrf :" + irrf);
 
   return irrf;
@@ -232,7 +232,7 @@ function calcula_irrf(bruto, inss, numDependentes, prot) {
 
 
 function calcula_sal_liquido(bruto, inss, irrf, emprestimo, sind, terco_ferias) {
-  var liquido = bruto + terco_ferias - inss - irrf - emprestimo - sind;
+  var liquido = Number((bruto + terco_ferias - inss - irrf - emprestimo - sind).toFixed(2));
   console.log("liquido : " + liquido);
   return liquido;
 }
