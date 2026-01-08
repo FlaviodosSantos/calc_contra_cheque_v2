@@ -32,7 +32,7 @@ function calculaContraCheque(entrada, tempo, tit, nivSup, numDependentes, protet
   var prot = verif_protetor(protetor);  
   
   //verificando desconto sindicatos
-  var sind =  plano_de_cargos * 0.01 * sindicatos;  
+  var sind =  Math.trunc(plano_de_cargos) * 0.01 * sindicatos;  
   
   //verificando desconto de emprestimos
   var emprestimo = emprestimos;
