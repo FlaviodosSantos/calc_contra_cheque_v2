@@ -198,29 +198,29 @@ function calcula_irrf(bruto, inss, numDependentes, prot) {
   var irrf = 0;
   // var baseIrrf = bruto - prot - inss - numDependentes * 189.59;
 
-  // calculo 2024  
-  // quando as deduções forem menor que 528 e salario menor que 5mil
-  //  if (inss + numDependentes * 189.59 < 564.80 && bruto - prot < 5200) 
-  if (inss + numDependentes * 189.59 < 564.80 ) {
-    var baseIrrf = bruto - prot - 564.80;
+  // calculo 2025  
+  // quando as deduções forem menor que 607.20 e salario menor que 5mil
+  //  if (inss + numDependentes * 189.59 < 607.20 && bruto - prot < 5200) 
+  if (inss + numDependentes * 189.59 < 607.20 ) {
+    var baseIrrf = bruto - prot - 607.20;
   } else {
     baseIrrf = bruto - prot - inss - numDependentes * 189.59;
   }
 
   console.log("baseIrrf : " + baseIrrf);
   
-  // calculo 2024
+  // calculo 2025
   // se numDependentes menor que 2 e salario menor que 5mil
-  if (baseIrrf <= 2259.20) {
+  if (baseIrrf <= 2428.8) {
     irrf = 0;
-  } else if (baseIrrf > 2259.20 && baseIrrf <= 2826.65) {
-    irrf = baseIrrf * 0.075 - 169.44;
+  } else if (baseIrrf > 2428.81 && baseIrrf <= 2826.65) {
+    irrf = baseIrrf * 0.075 - 182.16;
   } else if (baseIrrf > 2826.65 && baseIrrf <= 3751.05) {
-    irrf = baseIrrf * 0.15 - 381.44;
+    irrf = baseIrrf * 0.15 - 394.16;
   } else if (baseIrrf > 3751.05 && baseIrrf <= 4664.68) {
-    irrf = baseIrrf * 0.225 - 662.77;
+    irrf = baseIrrf * 0.225 - 675.49;
   } else {
-    irrf = baseIrrf * 0.275 - 896.00;
+    irrf = baseIrrf * 0.275 - 908.73;
   }
 
   console.log(" irrf :" + irrf);
