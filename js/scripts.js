@@ -3,6 +3,7 @@
 function calculaContraCheque(entrada, tempo, tit, nivSup, numDependentes, protetor, sindicatos, emprestimos, ferias) {
   //pegando os inputs
   var entrada = document.getElementById("entrada").value;
+  var insalubridade = document.getElementById("insalubridade").value;
   var tempo = document.getElementById("tempo").value;
   var tit = document.getElementById("porcentagem").value;
   var nivSup = document.getElementById("gratificacao").value;
@@ -17,7 +18,7 @@ function calculaContraCheque(entrada, tempo, tit, nivSup, numDependentes, protet
   var plano_de_cargos = calcula_plano(entrada, tempo);
   
   //calculando insalubridade
-  var insa = calcula_insalubridade(plano_de_cargos);    
+  var insa = calcula_insalubridade(plano_de_cargos, insalubridade);    
 
   //calculando o adicional de tempo de serviço
   var adts = calcula_tempo_seviço(plano_de_cargos, tempo);  
@@ -94,8 +95,8 @@ function calcula_plano(entrada, tempo) {
   return montante;
 }
 
-function calcula_insalubridade(plano_de_cargos) {
-  var insalubridade = Number((plano_de_cargos * (30 / 100)).toFixed(2));
+function calcula_insalubridade(plano_de_cargos, insalubridade) {
+  var insalubridade = Number((plano_de_cargos * (insalubridade / 100)).toFixed(2));
   console.log("insalubridade :" + insalubridade);
   return insalubridade;
 }
@@ -200,7 +201,7 @@ function calcula_irrf(bruto, inss, numDependentes, prot) {
   var irrf = 0;
   // var baseIrrf = bruto - prot - inss - numDependentes * 189.59;
 
-  // calculo 2025  
+  // Desconto simplificado 2025  
   // quando as deduções forem menor que 607.20 e salario menor que 5mil
   //  if (inss + numDependentes * 189.59 < 607.20 && bruto - prot < 5200) 
   if (inss + numDependentes * 189.59 < 607.20 ) {
@@ -213,6 +214,7 @@ function calcula_irrf(bruto, inss, numDependentes, prot) {
   
   // calculo 2025
   // se numDependentes menor que 2 e salario menor que 5mil
+  /*
   if (baseIrrf <= 2428.8) {
     irrf = 0;
   } else if (baseIrrf > 2428.81 && baseIrrf <= 2826.65) {
@@ -223,7 +225,19 @@ function calcula_irrf(bruto, inss, numDependentes, prot) {
     irrf = baseIrrf * 0.225 - 675.49;
   } else {
     irrf = baseIrrf * 0.275 - 908.73;
+  }*/
+
+  // calculo 2026 - isenção até 5mil
+  // desconto progressivo até 7350
+  if (baseIrrf <= 5000) {
+    irrf = 0;
+  } else if (baseIrrf > 5000 && baseIrrf <= 7350) {
+    irrf_devido = baseIrrf * 0.275 - 908.73;
+    irrf = irrf_devido - (978.62 - (baseIrrf * 0.133145)); // desconto 
+  } else {
+    irrf = baseIrrf * 0.275 - 908.73;
   }
+
   irrf = Number(irrf.toFixed(2))
   console.log(" irrf :" + irrf);
 
