@@ -154,39 +154,40 @@ function calcula_sal_bruto(plano_de_cargos, insa, adts, titulacao, gratNivSup, p
 
 function calcula_bruto_ferias(bruto, terco_ferias) {
   var bruto_ferias = bruto + terco_ferias;
-  console.log("bruto : " + bruto);
+  console.log("bruto + ferias : " + bruto_ferias);
   return bruto_ferias;
 }
 
 function calcula_inss(bruto, insa, prot) {
   var baseInss = bruto - insa - prot;
   var inss = 0;
+  console.log("baseInss: " + baseInss);
   
-  /* novo calculo 2025 */
+  /* calculo 2026 */
     //1ªfaixa
-  if (baseInss <= 1518.0) {    
+  if (baseInss <= 1621.00) {    
     inss = baseInss * 0.075;
 
     //2ªfaixa
-  } else if (baseInss > 1518.0 && baseInss <= 2793.88) {    
-    inss = 113.85 + (baseInss - 1518.0) * 0.09;
+  } else if (baseInss > 1621.00 && baseInss <= 2902.84) {    
+    inss = 121.57 + (baseInss - 1621.00) * 0.09;
 
     //3ªfaixa
-  } else if (baseInss > 2793.88 && baseInss <= 4190.83) {    
-    inss = 113.85 + 114.83 + (baseInss - 2793.88) * 0.12;
+  } else if (baseInss > 2902.84 && baseInss <= 4354.27) {    
+    inss = 121.57 + 115.36 + (baseInss - 2902.84) * 0.12;
 
     //4ªfaixa
-  } else if (baseInss > 4190.83 && baseInss <= 8157.41) {    
-    inss = 113.85 + 114.83 + 167.63 + (baseInss - 4190.83) * 0.14;
+  } else if (baseInss > 4354.27 && baseInss <= 8475.55) {    
+    inss = 121.57 + 115.36 + 174.17 + (baseInss - 4354.27) * 0.14;
 
     //5ªfaixa
   } else {
-    inss = 975.57;
+    inss = 988.07;
   }
-  var insss = Number(inss.toFixed(2))
-  console.log("inss: " + insss);
+  inss = Number(inss.toFixed(2))
+  console.log("inss: " + inss);
 
-  return insss;
+  return inss;
 }
 
 function calcula_irrf(bruto, inss, numDependentes, prot) {
@@ -239,7 +240,7 @@ function calcula_irrf(bruto, inss, numDependentes, prot) {
   }
 
   irrf = Number(irrf.toFixed(2))
-  console.log(" irrf :" + irrf);
+  console.log("irrf :" + irrf);
 
   return irrf;
 }
