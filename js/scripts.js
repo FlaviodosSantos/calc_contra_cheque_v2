@@ -234,7 +234,7 @@ function calcula_irrf(bruto, inss, numDependentes, prot) {
     irrf = 0;
   } else if (baseIrrf > 5000 && baseIrrf <= 7350) {
     irrf_devido = baseIrrf * 0.275 - 908.73;
-    irrf = irrf_devido - (978.62 - (baseIrrf * 0.133145)); // desconto 
+    irrf = irrf_devido - (978.62 - ((bruto - prot) * 0.133145)); // desconto 
   } else {
     irrf = baseIrrf * 0.275 - 908.73;
   }
